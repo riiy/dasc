@@ -7,7 +7,7 @@ import pytest
 
 from click.testing import CliRunner
 
-from dasc import dasc
+from dasc import main
 from dasc import cli
 
 
