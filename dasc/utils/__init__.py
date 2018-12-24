@@ -1,13 +1,14 @@
 import inspect
 import os
 
+from dasc.handlers.echo import echo
 
 def get_handlers(handler_path):
-    handers = {}
+    handers = {'echo':echo}
     import importlib.util
     handler_path = os.path.abspath(handler_path)
     for f in os.listdir(handler_path):
-        if os.path.isfile(os.path.join(handler_path, f)) and not f.startswith('__'):
+        if f.endswith('.py')and os.path.isfile(os.path.join(handler_path, f)) and not f.startswith('__'):
             spec = importlib.util.spec_from_file_location(handler_path + os.sep + f, os.path.join(handler_path, f))
             foo = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(foo)

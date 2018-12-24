@@ -11,14 +11,14 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=6.0', 'pyzmq==17.1.2' ]
+requirements = ['Click>=6.0', 'pyzmq==17.1.2']
 
 setup_requirements = ['pytest-runner', ]
 
 test_requirements = ['pytest', ]
 
 setup(
-    author="Rui Yao ",
+    author="Rui Yao",
     author_email='congminghaoxue@gmail.com',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
@@ -45,11 +45,11 @@ setup(
     include_package_data=True,
     keywords='dasc',
     name='dasc',
-    packages=find_packages(include=['dasc','dasc.utils']),
+    packages=find_packages(include=['dasc', 'dasc.utils', 'dasc.handlers']),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/riiy/dasc',
-    version='0.1.0',
+    version='0.1.1',
     zip_safe=False,
 )

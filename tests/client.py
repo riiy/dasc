@@ -21,10 +21,10 @@ class SerializingSocket(zmq.Socket):
     """
 
     def send_msg(self, obj, flags=0, protocol=-1):
-        return self.send(to_msg(obj), flags=flags)
+        return self.send_string(to_msg(obj), flags=flags)
 
     def recv_msg(self, flags=0):
-        return from_msg(self.recv(flags))
+        return from_msg(self.recv_string(flags))
 
 
 class SerializingContext(zmq.Context):
@@ -69,7 +69,7 @@ class Client(BaseClient):
     role = 'EchoClient'
 
     def run(self):
-        log.warning('%s starting...' % self.identify)
+        log.debug('%s starting...' % self.identify)
         context = self.context
         socket = context.socket(zmq.REQ)
         socket.connect('tcp://localhost:5555')
@@ -77,13 +77,13 @@ class Client(BaseClient):
         for i in range(self.times):
             message = '%s request %s' % (self.identify, i)
             request = ['echo', {'message': message}]
-            log.warning('%s is sending request: %s' % (self.identify, request))
+            log.debug('%s is sending request: %s' % (self.identify, request))
             socket.send_msg(request)
             result = socket.recv_msg()
             assert result['status'] == 'OK'
-            log.warning('%s got result: %s' % (self.identify, result))
+            log.debug('%s got result: %s' % (self.identify, result))
             time.sleep(self.sleep)
-        log.warning('%s exited' % self.identify)
+        log.debug('%s exited' % self.identify)
         socket.close()
 
 

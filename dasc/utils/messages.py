@@ -61,4 +61,4 @@ def from_msg(raw_msg):
     :return: dict with name, data and extra metadata keys
     :rtype: dict
     """
-    return pickle.loads(raw_msg)
+    return json.loads(raw_msg)
